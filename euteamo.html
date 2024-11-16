@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isa</title>
+    <style>
+        body {
+            background: linear-gradient(to top, #f7c6e1, #d8a0cc);
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .tulipas {
+            font-size: 3em;
+            cursor: pointer;
+        }
+
+        .message {
+            display: none;
+            font-size: 1.5em;
+            color: #ff66b2;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #d88cc3;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #f7c6e1;
+        }
+
+        .game {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #ff66b2;
+        }
+
+        /* Estilo para o texto de resposta transparente */
+        .response {
+            font-size: 1.8em;
+            color: rgba(255, 255, 255, 0.8); /* Transparência */
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro para destacar */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Isa, você é incrível</h1>
+    <div class="tulipas" onclick="showMessage()"></div>
+    <p>Às vezes fofa, às vezes não, mas <strong>sempre linda</strong> </p>
+    
+    <div class="message" id="message">Eu te amo muito! </div>
+
+    <!-- Botão "Eu te amo" -->
+    <button class="button" onclick="startGame()">Eu te amo </button>
+
+    <!-- Jogo que aparece após clicar -->
+    <div id="game" class="game" style="display: none;">
+        <p>Eu te amo muitoooo!!!!  Agora tente acertar o número secreto de 1 a 10!</p>
+        <input type="number" id="guess" placeholder="Adivinhe o número" min="1" max="10">
+        <button class="button" onclick="checkGuess()">Verificar</button>
+        <p id="feedback"></p>
+    </div>
+
+    <!-- Resposta transparente -->
+    <div id="response" class="response"></div>
+
+    <script>
+        let secretNumber;
+
+        // Função para mostrar a mensagem "Eu te amo muito!" 
+        function showMessage() {
+            document.getElementById('message').style.display = 'block';
+        }
+
+        // Função para iniciar o jogo de adivinhar o número
+        function startGame() {
+            // Gerando o número secreto toda vez que o jogo começar
+            secretNumber = Math.floor(Math.random() * 10) + 1; // Número aleatório entre 1 e 10
+            document.getElementById('game').style.display = 'block';
+            // Esconde o botão depois de começar o jogo
+            document.querySelector('.button').style.display = 'none';
+            
+            // Exibe a resposta transparente com o número secreto
+            document.getElementById('response').style.display = 'block';
+            document.getElementById('response').textContent = `Pssiu... a resposta é ${secretNumber} `;
+        }
+
+        // Função para verificar a resposta do jogo
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('guess').value);
+            const feedback = document.getElementById('feedback');
+
+            if (userGuess === secretNumber) {
+                feedback.textContent = "Acertou!  Você é demais! i love youu!!!";
+                document.getElementById('response').style.display = 'none'; // Esconde a resposta quando acerta
+            } else {
+                feedback.textContent = `Errou! O número era ${secretNumber}. Tente novamente!`;
+            }
+        }
+    </script>
+</body>
+</html>
